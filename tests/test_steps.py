@@ -4,12 +4,12 @@ from selene.support.conditions import be
 from selene.support.shared import browser
 from selene.support.shared.jquery_style import s
 
-
+# подойдет, если код не переиспользуюется или переиспользуется редко
 def test_dynamic_steps():
     with allure.step("Открываем главную страницу"):
         browser.open("https://github.com")
 
-    with allure.step("Ищем репозитория"):
+    with allure.step("Ищем репозиторий"):
         s(".header-search-input").click()
         s(".header-search-input").send_keys("eroshenkoam/allure-example")
         s(".header-search-input").submit()
@@ -24,6 +24,7 @@ def test_dynamic_steps():
         s(by.partial_text("#76")).should(be.visible)
 
 
+# подойдет, если код переиспользуюется
 def test_decorator_steps():
     open_main_page()
     search_for_repository("eroshenkoam/allure-example")
