@@ -3,3 +3,6 @@ tests/allure-results
 
 # Idea
 .idea
+
+tests/.pytest_cache
+venv
