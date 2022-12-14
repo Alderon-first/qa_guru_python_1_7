@@ -3,7 +3,6 @@ from selene.support.conditions import be
 from selene.support.shared import browser
 from selene.support.shared.jquery_style import s
 import allure
-from allure import attachment_type
 from allure_commons.types import Severity
 
 
@@ -17,7 +16,7 @@ num = "#76"
 @allure.severity(Severity.MINOR)
 @allure.label("owner", "ushkoev")
 @allure.feature("Задача проверки Issue")
-@allure.story("Проверяем Issue в нашем репозитории")
+@allure.story("Проверяем Issue в нашем репозитории_1")
 @allure.link("https://github.com", name="test")
 # прсто тест на селене + анотации
 def test_github():
@@ -26,12 +25,19 @@ def test_github():
     s(".header-search-input").send_keys(user_rep).submit()
     s(by.link_text(user_rep)).click()
     s("#issues-tab").click()
-    #browser.save_screenshot("screen")
-    #allure.attach(browser.last_screenshot, name='Скриншот', attachment_type=allure.attachment_type.PNG)
+    # browser.save_screenshot("screen")
+    # allure.attach(browser.last_screenshot, name='Скриншот', attachment_type=allure.attachment_type.PNG)
     # сохраняется почему-то пустой файл
     s(by.partial_text(num)).should(be.visible)
 
 
+# аннотации
+@allure.tag("web")
+@allure.severity(Severity.BLOCKER)
+@allure.label("owner", "ushkoev")
+@allure.feature("Задача проверки Issue")
+@allure.story("Проверяем Issue в нашем репозитории_2")
+@allure.link("https://github.com", name="test")
 # тест на селене через лямбда шаги через with allure.step
 def test_dynamic_steps():
     with allure.step("Открываем главную страницу"):
@@ -51,6 +57,13 @@ def test_dynamic_steps():
     with allure.step("Проверяем наличие Issue с номером "+num):
         s(by.partial_text(num)).should(be.visible)
 
+# аннотации
+@allure.tag("web")
+@allure.severity(Severity.BLOCKER)
+@allure.label("owner", "ushkoev")
+@allure.feature("Задача проверки Issue")
+@allure.story("Проверяем Issue в нашем репозитории_2")
+@allure.link("https://github.com", name="test")
 # тест на селене с декоратором @allure.step
 def test_decorator_steps():
     open_main_page(url)
