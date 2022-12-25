@@ -24,9 +24,7 @@ def test_github():
     s(".header-search-input").send_keys(user_rep).submit()
     s(by.link_text(user_rep)).click()
     s("#issues-tab").click()
-    # browser.save_screenshot("screen")
-    # allure.attach(browser.last_screenshot, name='Скриншот', attachment_type=allure.attachment_type.PNG)
-    # сохраняется почему-то пустой файл
+    allure.attach(browser.driver.get_screenshot_as_png(), name="Screen", attachment_type=AttachmentType.PNG)
     s(by.partial_text(num)).should(be.visible)
 
 
@@ -54,6 +52,7 @@ def test_dynamic_steps():
         s("#issues-tab").click()
 
     with allure.step("Проверяем наличие Issue с номером " + num):
+        allure.attach(browser.driver.get_screenshot_as_png(), name="Screen", attachment_type=AttachmentType.PNG)
         s(by.partial_text(num)).should(be.visible)
 
 
@@ -97,5 +96,6 @@ def open_issue_tab():
 
 @allure.step("Проверяем наличие Issue с номером {number}")
 def should_see_issue_with_number(number):
+    allure.attach(browser.driver.get_screenshot_as_png(), name="Screen", attachment_type=AttachmentType.PNG)
     s(by.partial_text(number)).click()
-    allure.attach(browser.driver.get_screenshot_as_png(), name='Screen', attachment_type=AttachmentType.PNG)
+
