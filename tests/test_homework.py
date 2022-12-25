@@ -3,8 +3,7 @@ from selene.support.conditions import be
 from selene.support.shared import browser
 from selene.support.shared.jquery_style import s
 import allure
-from allure_commons.types import Severity
-
+from allure_commons.types import Severity, AttachmentType
 
 url = "https://github.com"
 user_rep = "eroshenkoam/allure-example"
@@ -54,8 +53,9 @@ def test_dynamic_steps():
     with allure.step("Открываем таб Issues"):
         s("#issues-tab").click()
 
-    with allure.step("Проверяем наличие Issue с номером "+num):
+    with allure.step("Проверяем наличие Issue с номером " + num):
         s(by.partial_text(num)).should(be.visible)
+
 
 # аннотации
 @allure.tag("web")
@@ -98,3 +98,4 @@ def open_issue_tab():
 @allure.step("Проверяем наличие Issue с номером {number}")
 def should_see_issue_with_number(number):
     s(by.partial_text(number)).click()
+    allure.attach(browser.driver.get_screenshot_as_png(), name='Screen', attachment_type=AttachmentType.PNG)
